@@ -1,113 +1,59 @@
-
-
-.overlay-text{
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-display: flex;
-justify-content: center;
-align-items: center;
-z-index: 100;
-flex-direction: column;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.overlay-text.visible{
-    display: flex;
-    flex-direction: column;
-    animation: overlay-grow 500ms forwards;
+body {
+  height: 100vh;
+  display: flex;
+  background: #060AB2;
 }
 
-@keyframes overlay-grow{
-    from{
-        background-color: rgb(33, 188, 167);
-        font-size: 0;
-    }
-    to{
-        background: rgba(33, 188, 167, .7);
-        font-size: 10em;
-    }
-}
-body{
-    background-color: navy;
-    margin: 0;
-
+.memory-game {
+  width: 640px;
+  height: 640px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  perspective: 1000px;
 }
 
-p, span {
-    color: whitesmoke;
-    font-size: 1em;
-  }
-  
-  h1{
-    text-align: center;
-    font-size: 4em;
-    color: whitesmoke
-  }
-  
-  .overlay-text-small{
-    font-size: .3em;
-  }
+.memory-card {
+  width: calc(25% - 10px);
+  height: calc(33.333% - 10px);
+  margin: 5px;
+  position: relative;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform .5s;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+}
 
-  .game-card{
-    transform-style: preserve-3d;
-    transition: all .5s ease-in-out;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    color: gold;
-    height: 200px;
-    width: 150px;
+.memory-card:active {
+  transform: scale(0.97);
+  transition: transform .2s;
+}
 
-  }
+.memory-card.flip {
+  transform: rotateY(180deg);
+}
+
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  border-radius: 5px;
+  background: #1C7CCC;
+  backface-visibility: hidden;
+}
 
 
-  .game-info-container{
-    grid-column: 1/-1;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .game-container{
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-gap: 10px;
-    margin: 50px auto;
-    justify-content: center;
-    perspective: 500px;
-  }
-
-  .card-face{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height:100%;
-    overflow: hidden;
-    backface-visibility: hidden;
-    border-radius: 12px;
-    border-width: 1px;
-    border-style: solid;
-    transition: transform 500ms ease-in-out;
-  }
-
-  .game-card.visible .card-front{
-    transform: rotateY(0);
-  }
-
-  .game-card.visible .card-back{
-    transform: rotateY(-180deg);
-  }
-
-  .game-card-value{
-    position: relative;
-    transition: transform 100ms ease-in-out;
-    transform: scale(.9);
-  }
+.front-face {
+  transform: rotateY(180deg);
+}
 
   *{
     box-sizing: border-box;
